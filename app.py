@@ -15,7 +15,7 @@ app.config['UPLOAD_FOLDER'] = IMAGE_DIRECTORY
 def index():
     return ':)))))) - kinky'
 
-@app.route('/encode')
+@app.route('/encode', methods=['POST'])
 def encode():
     file = request.files['image']
     file_name = 'temp-'+str(int(time.time()*1000000))+'-.jpeg'
