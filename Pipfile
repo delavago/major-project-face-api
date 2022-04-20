@@ -9,6 +9,7 @@ dlib = "*"
 face-recognition = "*"
 numpy = "*"
 opencv-python = "*"
+flask-cors = "*"
 
 [dev-packages]
 
