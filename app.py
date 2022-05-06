@@ -1,3 +1,4 @@
+from logging import exception
 from flask import Flask,request,redirect,url_for,send_from_directory
 from flask_cors import CORS
 import os
@@ -24,7 +25,12 @@ def encode():
     file.save(os.path.join(app.config['UPLOAD_FOLDER'],file_name))
     file_path = os.path.join(app.config['UPLOAD_FOLDER'],file_name)
     image_data = face.load_file(file_path)
-    encodings = face.generate_encodings(image_data)
+    
+    try:
+        encodings = face.generate_encodings(image_data)
+    except:
+        print("Facial encodings failed")
+
     os.remove(file_path)
     return {'status': '200 OK','encodings':encodings.tolist()}
 
