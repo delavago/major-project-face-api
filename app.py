@@ -25,7 +25,7 @@ def encode():
     file.save(os.path.join(app.config['UPLOAD_FOLDER'],file_name))
     file_path = os.path.join(app.config['UPLOAD_FOLDER'],file_name)
     image_data = face.load_file(file_path)
-    
+
     try:
         encodings = face.generate_encodings(image_data)
     except:
@@ -39,3 +39,16 @@ def compare_encodings():
     known = numpy.array(request.json['known_encodings'])
     incoming = numpy.array(request.json['incoming_encodings'])
     return {'status': '200 OK', 'comparison_result':bool(face.compare_encodings(known, incoming))}
+
+@app.route('/find-match',methods=['POST'])
+def find_match():
+    known = numpy.array(request.json['known_encodings'])
+    customer_face_data_list = request.json['customer_face_data_list']
+    result = None
+    for record in customer_face_data_list:
+        incoming = numpy.array(record['faceData']['encodings'])
+        if bool(face.compare_encodings(known, incoming))==True:
+            result = record;
+            break;
+    
+    return {'status': '200 OK', 'found_match': result}
