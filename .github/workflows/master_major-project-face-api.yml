@@ -70,3 +70,4 @@ jobs:
           app-name: 'major-project-face-api'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B4E6CBF48772450792C0FD4F69FA12D7 }}
+          package: .
