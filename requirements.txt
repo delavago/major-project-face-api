@@ -1,4 +1,5 @@
 flask
+cmake
 dlib
 face-recognition
 numpy
